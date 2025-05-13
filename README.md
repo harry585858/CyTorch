@@ -5,9 +5,7 @@ How to use
 
 class:
 
-  Layer_4 //4byte float
-  
-  Layer_8 //8byte double
+  Layer
   
 function:
 
