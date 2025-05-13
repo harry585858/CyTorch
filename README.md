@@ -8,5 +8,7 @@ class:
   Layer_8 //8byte double
 function:
   .print //print
+  
   .printrear // print all (linked)
+  
   .append(&Layer) // append (also between)
