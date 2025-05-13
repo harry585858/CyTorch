@@ -1,25 +1,40 @@
 #include "layer.h"
 #include <iostream>
-void Layer::append(Layer* toappend){//add layer
+
+// 템플릿 구현
+
+template <typename T>
+Layer<T>::Layer(int size) {
+    front = nullptr;
+    rear = nullptr;
+    arr.resize(size);
+}
+
+template <typename T>
+void Layer<T>::append(BaseLayer* toappend) {
     toappend->front = this;
     toappend->rear = this->rear;
     this->rear = toappend;
 }
-void Layer::printrear(){
-    Layer* start = this;
-    while(start != nullptr){
-        (*start).print();
-        start = start->rear;
+
+template <typename T>
+void Layer<T>::printrear() {
+    Layer<T>* start = this;
+    while (start != nullptr) {
+        start->print();
+        start = static_cast<Layer<T>*>(start->rear);
     }
-}
-Layer::Layer(int size) {
-    arr.resize(size);
 }
 
-void Layer::print() {
+template <typename T>
+void Layer<T>::print() {
     for (int i = 0; i < arr.size(); i++) {
-        printf("vertex : %d\n", i);
+        std::cout << "vertex : " << i << std::endl;
         arr[i].print();
     }
-    std::printf("\n");
+    std::cout << std::endl;
 }
+
+// 명시적 인스턴스화: Layer 클래스가 float, double을 처리할 수 있도록 인스턴스화
+template class Layer<float>;
+template class Layer<double>;
