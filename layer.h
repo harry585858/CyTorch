@@ -1,32 +1,43 @@
-#ifndef LAYER_H
-#define LAYER_H
-
 #include <vector>
 #include "vertex.h"
 
 // 공통 기본 클래스
-class BaseLayer {
+class Layer {
 public:
-    BaseLayer* front;
-    BaseLayer* rear;
+    Layer* front;
+    Layer* rear;
 
-    virtual ~BaseLayer() = default;
-    virtual void print() = 0;  // 다형성을 위한 virtual 함수
+    virtual ~Layer() = default;  // 소멸자에 virtual 추가
+
+    // 다형성을 위한 virtual 함수들
+    virtual void print() = 0;
     virtual void printrear() = 0;
+    virtual void append(Layer* toappend) = 0;
 };
 
 // 템플릿 클래스 (구체적인 Layer 타입)
-template <typename T>
-class Layer : public BaseLayer {
+class Layer_4 : public Layer {
 public:
-    std::vector<vertex<T>> arr;
+    std::vector<vertex_4> varr;
 
-    Layer(int size);
-    virtual ~Layer() = default;
+    Layer_4(int size);
 
-    virtual void print() override;
-    virtual void printrear() override;
-    void append(BaseLayer* toappend);
+    void print() override;
+
+    void printrear() override;
+
+    void append(Layer* toappend) override;
 };
 
-#endif // LAYER_H
+class Layer_8 : public Layer {
+public:
+    std::vector<vertex_8> varr;
+
+    Layer_8(int size);
+
+    void print() override;
+
+    void printrear() override;
+
+    void append(Layer* toappend) override;
+};

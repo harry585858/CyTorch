@@ -1,29 +1,28 @@
-#pragma once
 #include <vector>
 #include <iostream>
+using namespace std;
 
-template <typename T>
 class vertex {
-    std::vector<T> weight;
-    T bias, output;
 public:
     vertex() = default;
-
+    template <typename T>
     T ReLU(T t) {
         return (t < 0) ? 0 : t;
     }
+    virtual void print() = 0; // 순수 가상 함수
+    virtual ~vertex() = default; // 가상 소멸자 추가
+};
 
-    void print() const {
-        std::cout << "bias : " << bias << "\n";
-        std::cout << "weight : ";
-        for (const auto& w : weight) {
-            std::cout << w << " ";
-        }
-        std::cout << "\n";
-    }
+class vertex_4 : public vertex {
+public:
+    float bias, output;
+    vector<float> weight;
+    void print() override; // 부모 클래스의 virtual 함수 오버라이드
+};
 
-    // 예시로 bias, weight 설정 함수도 추가 가능
-    void setBias(T b) { bias = b; }
-    void setWeights(const std::vector<T>& w) { weight = w; }
-    T getOutput() const { return output; }
+class vertex_8 : public vertex {
+public:
+    double bias, output;
+    vector<double> weight;
+    void print() override; // 부모 클래스의 virtual 함수 오버라이드
 };
