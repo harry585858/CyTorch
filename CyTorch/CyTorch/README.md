@@ -5,8 +5,8 @@ How to use
 
 class:
 
-  Layer
-  
+  Layer_4
+  Layer_6
 function:
 
   .print //print
