@@ -13,23 +13,13 @@ void Layer::printrear(){
         start = start->rear;
     }
 }
-Layer_4::Layer_4(int size) {
+Layer::Layer(int size) {
     arr.resize(size);
 }
 
-void Layer_4::print() {
+void Layer::print() {
     for (int i = 0; i < arr.size(); i++) {
-        arr[i].print();
-    }
-    std::printf("\n");
-}
-
-Layer_8::Layer_8(int size) {
-    arr.resize(size);
-}
-
-void Layer_8::print() {
-    for (int i = 0; i < arr.size(); i++) {
+        printf("vertex : %d\n", i);
         arr[i].print();
     }
     std::printf("\n");
