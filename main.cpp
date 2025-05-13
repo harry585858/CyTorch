@@ -38,6 +38,6 @@ public:
     }
 };
 int main(int argc, const char * argv[]) {
-    
+    cout << "hello_user";
     return 0;
 }
