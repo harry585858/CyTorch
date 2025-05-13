@@ -12,5 +12,9 @@
 #include "layer.h"
 using namespace std;
 int main() {
-    
+    Layer_4 newone(4);
+    Layer_4 otherone(5);
+    newone.append(&otherone);
+    newone.printrear();
+    return 0;
 }
