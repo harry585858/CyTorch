@@ -12,7 +12,6 @@ public:
     // 다형성을 위한 virtual 함수들
     virtual void print() = 0;
     virtual void printrear() = 0;
-    virtual void append(Layer* toappend) = 0;
 };
 
 // 템플릿 클래스 (구체적인 Layer 타입)
@@ -26,7 +25,7 @@ public:
 
     void printrear() override;
 
-    void append(Layer* toappend) override;
+    void append(Layer_4* toappend);
 };
 
 class Layer_8 : public Layer {
@@ -39,5 +38,5 @@ public:
 
     void printrear() override;
 
-    void append(Layer* toappend) override;
+    void append(Layer_8* toappend);
 };

@@ -6,10 +6,13 @@ Layer_4::Layer_4(int size) {
     rear = nullptr;
     varr.resize(size);
 }
-void Layer_4::append(Layer* toappend) {
+void Layer_4::append(Layer_4* toappend) {
     toappend->front = this;
     toappend->rear = this->rear;
     this->rear = toappend;
+    for(int i=0;i<toappend->varr.size(); i++){
+        toappend->varr[i].weight.resize(this->varr.size());
+    }
 }
 
 void Layer_4::printrear() {
@@ -34,7 +37,7 @@ Layer_8::Layer_8(int size) {
     rear = nullptr;
     varr.resize(size);
 }
-void Layer_8::append(Layer* toappend) {
+void Layer_8::append(Layer_8* toappend) {
     toappend->front = this;
     toappend->rear = this->rear;
     this->rear = toappend;
