@@ -1,6 +1,6 @@
 #include "layer.h"
 #include <iostream>
-
+//https://github.com/harry585858/CyTorch.git
 Layer::Layer() : front(nullptr), rear(nullptr) {}
 Layer::~Layer() {}
 void Layer::append(Layer* toappend){//add layer
