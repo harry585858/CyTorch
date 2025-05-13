@@ -1,5 +1,3 @@
-//
-//  main.cpp
 //  cytorch
 //
 //  Created by 양재민 on 5/13/25.
