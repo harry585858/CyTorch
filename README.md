@@ -3,14 +3,10 @@ AI with CPP
 
 How to use
 
-class:
-
-  Layer_4
-  Layer_6
-function:
-
-  .print //print
-  
-  .printrear // print all (linked)
-  
-  .append(&Layer) // append (also between)
+Layer_4 newone(4); //or Layer_8
+Layer_4 otherone(5); //this is float(4byte)
+Endlayer endone(5); // last layer
+newone.append(&otherone); // append(link)
+newone.runlayer(); // run this is not 'fit'
+otherone.runlayer(); // 
+endone.runlayer(); // running 'Endlayer' will print the result
