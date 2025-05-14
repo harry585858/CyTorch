@@ -4,9 +4,9 @@ using namespace std;
 
 class vertex {
 public:
-    vertex() = default;
+    vertex() = default; 
     template <typename T>
-    T ReLU(T t) {
+    T relu(T t) {
         return (t < 0) ? 0 : t;
     }
     virtual void print() = 0; // 순수 가상 함수
