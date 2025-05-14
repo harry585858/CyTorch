@@ -1,3 +1,5 @@
+//
+//  main.cpp
 //  cytorch
 //
 //  Created by 양재민 on 5/13/25.
@@ -12,7 +14,10 @@ using namespace std;
 int main() {
     Layer_4 newone(4);
     Layer_4 otherone(5);
+    Endlayer endone(5);
     newone.append(&otherone);
-    newone.printrear();
+    newone.runlayer();
+    otherone.runlayer();
+    endone.runlayer();
     return 0;
 }
