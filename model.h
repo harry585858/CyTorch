@@ -10,4 +10,5 @@ public:
     ~Model();
     void save();
     void run();
+    void print();
 };

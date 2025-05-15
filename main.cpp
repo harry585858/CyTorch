@@ -12,6 +12,7 @@
 #include "model.h"
 using namespace std;
 int main() {
-    Model(3, {3,5,5,5,3});//layer, input, output
+    Model model(5, {3,5,5,5,3});//layer, input, output
+    model.print();
     return 0;
 }

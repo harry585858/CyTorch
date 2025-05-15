@@ -2,18 +2,19 @@
 #include <cstdio>
 #include <fstream>
 #include <sstream>
+#define save_direction "/Users/yangjaemin/Desktop/model.json"
 Model::Model(int num, vector<int> arr){
     int inputsize = arr[0];
-    int outputsize = arr[num+1];
-    larr.resize(num);
+    int outputsize = arr[num-1];
+    larr.resize(num-2);
     inp = new Layer_input(inputsize);
-    larr[0] = new Layer_4(1);
-    for(int i=1;i<num;i++){
-        larr[i] = new Layer_4(1);
+    larr[0] = new Layer_4(arr[0]);
+    for(int i=1;i<num-2;i++){
+        larr[i] = new Layer_4(arr[i]);
         larr[i-1]->append(larr[i]);
     }
     outp = new Layer_output(outputsize);
-    larr[num-1]->append(outp);
+    larr[num-3]->append(outp);
 }
 Model::~Model(){
     delete inp;
@@ -23,7 +24,11 @@ Model::~Model(){
     }
 }
 void Model::save() {
-    std::ofstream out("model.json");
+    std::ofstream out(save_direction);
+    if (!out.is_open()) {
+        std::cerr << "model.json 파일을 열 수 없습니다." << std::endl;
+        return;
+    }
     out << "{" << std::endl;
 
     for (int i = 0; i < larr.size(); i++) {
@@ -50,4 +55,9 @@ void Model::save() {
 
     out << "}" << std::endl;
     out.close();
+}
+void Model::print(){
+    for(int i=0; i < larr.size(); i++){
+        larr[i]->print();
+    }
 }
