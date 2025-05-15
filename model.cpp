@@ -2,11 +2,22 @@
 #include <cstdio>
 #include <fstream>
 #include <sstream>
-Model::Model(int num, int inputsize, int outputsize){
-    larr.resize(num+2);
-    larr[0] = new Layer_input(inputsize);
+Model::Model(int num, vector<int> arr){
+    int inputsize = arr[0];
+    int outputsize = arr[num+1];
+    larr.resize(num);
+    inp = new Layer_input(inputsize);
+    larr[0] = new Layer_4(1);
+    for(int i=1;i<num;i++){
+        larr[i] = new Layer_4(1);
+        larr[i-1]->append(larr[i]);
+    }
+    outp = new Layer_output(outputsize);
+    larr[num-1]->append(outp);
 }
 Model::~Model(){
+    delete inp;
+    delete outp;
     for(int i=0; i < larr.size();i++){
         delete larr[i];
     }

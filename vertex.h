@@ -19,12 +19,3 @@ public:
     void print() override; // 부모 클래스의 virtual 함수 오버라이드
     float runvertex();
 };
-
-class vertex_8 : public vertex {
-public:
-    double bias;
-    double (*fp)(double)=relu;
-    vector<double> input, weight;
-    void print() override; // 부모 클래스의 virtual 함수 오버라이드
-    double runvertex();
-};

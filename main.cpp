@@ -9,16 +9,9 @@
 #include <iostream>
 #include <vector>
 #include <stdio.h>
-#include "layer.h"
+#include "model.h"
 using namespace std;
 int main() {
-    Layer_input(4);
-    Layer_4 newone(4);
-    Layer_4 otherone(5);
-    Layer_output endone(5);
-    newone.append(&otherone);
-    newone.runlayer();
-    otherone.runlayer();
-    endone.runlayer();
+    Model(3, {3,5,5,5,3});//layer, input, output
     return 0;
 }

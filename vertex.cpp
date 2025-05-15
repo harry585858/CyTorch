@@ -19,17 +19,3 @@ float vertex_4::runvertex(){
     }
     return fp(sum);
 }
-void vertex_8::print() {
-    printf("bias : %lf\nweight : ", this->bias);  // double의 경우 %lf 사용
-    for (int i = 0; i < this->weight.size(); i++) {
-        printf("%lf ", this->weight[i]);  // double의 경우 %lf 사용
-    }
-    printf("\n");
-}
-double vertex_8::runvertex(){
-    double sum = 0;
-    for(int i=0;i<this->weight.size(); i++){
-        sum += weight[i] * input[i] + bias;
-    }
-    return fp(sum);
-}

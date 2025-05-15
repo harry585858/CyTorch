@@ -2,8 +2,11 @@
 #include "layer.h"
 
 class Model{
-    vector<Layer*> larr;
-    Model(int num, int inputsize, int outputsize);
+public:
+    Layer_input* inp;
+    Layer_output* outp;
+    vector<Layer_4*> larr;
+    Model(int num, vector<int> arr);
     ~Model();
     void save();
     void run();

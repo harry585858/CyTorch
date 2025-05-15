@@ -11,6 +11,7 @@ public:
     // 다형성을 위한 virtual 함수들
     virtual void print() = 0;
     virtual void printrear() = 0;
+    void append(Layer* toappend);
     void runlayer();
 };
 
@@ -27,25 +28,12 @@ public:
     void printrear() override;
 
     void append(Layer_4* toappend);
-};
-
-class Layer_8 : public Layer {
-public:
-    double (Layer::*fp)(double);
-    std::vector<vertex_8> varr;
-
-    Layer_8(int size);
-
-    void print() override;
-
-    void printrear() override;
-
-    void append(Layer_8* toappend);
+    void append(Layer* toappend);
 };
 class Layer_input : public Layer{
 public:
     double (Layer::*fp)(double);
-    std::vector<vertex_8> varr;
+    std::vector<vertex_4> varr;
 
     Layer_input(int size);
     
@@ -55,13 +43,13 @@ public:
 
     void printrear() override;
 
-    void append(Layer_8* toappend);
+    void append(Layer_4* toappend);
 };
 
 class Layer_output : public Layer{
 public:
     double (Layer::*fp)(double);
-    std::vector<vertex_8> varr;
+    std::vector<vertex_4> varr;
 
     Layer_output(int size);
     
@@ -71,5 +59,5 @@ public:
 
     void printrear() override;
 
-    void append(Layer_8* toappend);
+    void append(Layer_4* toappend);
 };
