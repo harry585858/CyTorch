@@ -65,12 +65,12 @@ void Layer_8::print() {
     }
     std::cout << std::endl;
 }
-Endlayer::Endlayer(int size){
+Layer_input::Layer_input(int size){
     front = nullptr;
     rear = nullptr;
     varr.resize(size);
 }
-void Endlayer::printrear() {
+void Layer_input::printrear() {
     Layer* start = this;
     while (start != nullptr) {
         start->print();
@@ -78,7 +78,7 @@ void Endlayer::printrear() {
     }
 }
 
-void Endlayer::print() {
+void Layer_input::print() {
     for (int i = 0; i < varr.size(); i++) {
         std::cout << "vertex : " << i << std::endl;
         varr[i].print();
@@ -86,7 +86,37 @@ void Endlayer::print() {
     
     std::cout << std::endl;
 }
-void Endlayer::runlayer(){
+void Layer_input::runlayer(){
+    this->print();
+    printf("---THE END!---\n");
+    for(int i=0;i<this->varr.size(); i++){
+        auto output = varr[i].runvertex();
+        printf("%lf ", output);
+    }
+}
+
+Layer_output::Layer_output(int size){
+    front = nullptr;
+    rear = nullptr;
+    varr.resize(size);
+}
+void Layer_output::printrear() {
+    Layer* start = this;
+    while (start != nullptr) {
+        start->print();
+        start = static_cast<Layer*>(start->rear);
+    }
+}
+
+void Layer_output::print() {
+    for (int i = 0; i < varr.size(); i++) {
+        std::cout << "vertex : " << i << std::endl;
+        varr[i].print();
+    }
+    
+    std::cout << std::endl;
+}
+void Layer_output::runlayer(){
     this->print();
     printf("---THE END!---\n");
     for(int i=0;i<this->varr.size(); i++){

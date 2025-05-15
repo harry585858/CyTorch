@@ -42,12 +42,28 @@ public:
 
     void append(Layer_8* toappend);
 };
-class Endlayer : public Layer{
-public: 
+class Layer_input : public Layer{
+public:
     double (Layer::*fp)(double);
     std::vector<vertex_8> varr;
 
-    Endlayer(int size);
+    Layer_input(int size);
+    
+    void runlayer();
+    
+    void print() override;
+
+    void printrear() override;
+
+    void append(Layer_8* toappend);
+};
+
+class Layer_output : public Layer{
+public:
+    double (Layer::*fp)(double);
+    std::vector<vertex_8> varr;
+
+    Layer_output(int size);
     
     void runlayer();
     
