@@ -3,6 +3,8 @@
 
 class Model{
     vector<Layer*> larr;
+    Model(int num, int inputsize, int outputsize);
+    ~Model();
     void save();
     void run();
 };
