@@ -12,7 +12,7 @@ public:
     virtual void print() = 0;
     virtual void printrear() = 0;
     void append(Layer* toappend);
-    void runlayer();
+    void foward();
 };
 
 // 템플릿 클래스 (구체적인 Layer 타입)
@@ -30,21 +30,6 @@ public:
     void append(Layer_4* toappend);
     void append(Layer* toappend);
 };
-class Layer_input : public Layer{
-public:
-    double (Layer::*fp)(double);
-    std::vector<vertex_4> varr;
-
-    Layer_input(int size);
-    
-    void runlayer();
-    
-    void print() override;
-
-    void printrear() override;
-
-    void append(Layer_4* toappend);
-};
 
 class Layer_output : public Layer{
 public:
@@ -53,7 +38,7 @@ public:
 
     Layer_output(int size);
     
-    void runlayer();
+    void foward();
     
     void print() override;
 

@@ -4,20 +4,17 @@
 #include <sstream>
 #define save_direction "/Users/yangjaemin/Desktop/model.json"
 Model::Model(int num, vector<int> arr){
-    int inputsize = arr[0];
     int outputsize = arr[num-1];
-    larr.resize(num-2);
-    inp = new Layer_input(inputsize);
-    larr[0] = new Layer_4(arr[0]);
-    for(int i=1;i<num-2;i++){
+    larr.resize(num-1);
+    larr[0] = new Layer_4(arr[0]); //input layer
+    for(int i=1;i<num-1;i++){
         larr[i] = new Layer_4(arr[i]);
         larr[i-1]->append(larr[i]);
     }
     outp = new Layer_output(outputsize);
-    larr[num-3]->append(outp);
+    larr[num-2]->append(outp);
 }
 Model::~Model(){
-    delete inp;
     delete outp;
     for(int i=0; i < larr.size();i++){
         delete larr[i];
@@ -59,5 +56,22 @@ void Model::save() {
 void Model::print(){
     for(int i=0; i < larr.size(); i++){
         larr[i]->print();
+    }
+}
+void Model::foward(vector<float> firstlayer){
+    if(firstlayer.size() != larr[0]->varr.size()){
+        printf("Input Layer Size Error");
+        return;
+    }
+    printf("---START!---\n");
+    for(int i=0;i<firstlayer.size();i++){//input layer setting
+        larr[i]->varr[i].weight.resize(1);
+        larr[i]->varr[i].input.resize(1);
+        larr[i]->varr[i].bias = 0.0;
+        larr[i]->varr[i].weight[0] = 1.0;
+        larr[i]->varr[i].input[0] = firstlayer[i];
+    }
+    for(int i=0;i<larr.size(); i++){
+        larr[i]->foward();
     }
 }

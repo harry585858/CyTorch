@@ -1,10 +1,6 @@
 // vertex.cpp
 #include "vertex.h"
 #include <cstdio>
-float vertex::runvertex(){
-    printf("don't use it");
-    return 0.0;
-}
 void vertex_4::print() {
     printf("bias : %f\nweight : ", this->bias);  // float의 경우 %f 사용
     for (int i = 0; i < this->weight.size(); i++) {
@@ -12,10 +8,11 @@ void vertex_4::print() {
     }
     std::cout << "\n";
 }
-float vertex_4::runvertex(){
+float vertex_4::foward(){
     float sum = 0;
-    for(int i=0;i<this->weight.size(); i++){
-        sum += weight[i] * input[i] + bias;
+    for(int i=0;i<this->input.size(); i++){
+        sum += weight[i] * input[i];
     }
+    sum+=bias;
     return fp(sum);
 }
