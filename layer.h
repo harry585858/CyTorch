@@ -11,6 +11,7 @@ public:
     // 다형성을 위한 virtual 함수들
     virtual void print() = 0;
     virtual void printrear() = 0;
+    virtual void init()=0;
     void append(Layer* toappend);
     void foward();
 };
@@ -29,6 +30,7 @@ public:
 
     void append(Layer_4* toappend);
     void append(Layer* toappend);
+    void init() override;
 };
 
 class Layer_output : public Layer{
@@ -45,4 +47,5 @@ public:
     void printrear() override;
 
     void append(Layer_4* toappend);
+    void init() override;
 };

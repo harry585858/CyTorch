@@ -13,6 +13,15 @@ Model::Model(int num, vector<int> arr){
     }
     outp = new Layer_output(outputsize);
     larr[num-2]->append(outp);
+    for(int i=1; i < larr.size();i++){
+        larr[i]->init();
+    }
+    for(int i = 0; i < larr[0]->varr.size(); i++){
+        larr[0]->varr[i].weight.resize(1);
+        larr[0]->varr[i].input.resize(1);
+        larr[0]->varr[i].bias = 0.0;
+        larr[0]->varr[i].weight[0] = 1.0;
+    }
 }
 Model::~Model(){
     delete outp;
@@ -23,7 +32,7 @@ Model::~Model(){
 void Model::save() {
     std::ofstream out(save_direction);
     if (!out.is_open()) {
-        std::cerr << "model.json 파일을 열 수 없습니다." << std::endl;
+        printf("cannot open \n");
         return;
     }
     out << "{" << std::endl;
@@ -65,13 +74,15 @@ void Model::foward(vector<float> firstlayer){
     }
     printf("---START!---\n");
     for(int i=0;i<firstlayer.size();i++){//input layer setting
-        larr[i]->varr[i].weight.resize(1);
-        larr[i]->varr[i].input.resize(1);
-        larr[i]->varr[i].bias = 0.0;
-        larr[i]->varr[i].weight[0] = 1.0;
-        larr[i]->varr[i].input[0] = firstlayer[i];
+        larr[0]->varr[i].input[0] = firstlayer[i];
     }
     for(int i=0;i<larr.size(); i++){
         larr[i]->foward();
+    }
+    outp->foward();
+}
+void Model::init(){
+    for(int i=1; i<larr.size(); i++){
+        larr[i]->init();
     }
 }

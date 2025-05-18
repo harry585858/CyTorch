@@ -10,4 +10,5 @@ public:
     void save();
     void print();
     void foward(vector<float>);
+    void init();
 };

@@ -1,6 +1,5 @@
 #include "layer.h"
 #include <cstdio>
-// 템플릿 구현
 void Layer::foward(){
     for(int i=0;i<this->varr.size(); i++){
         auto output = varr[i].foward();
@@ -42,11 +41,17 @@ void Layer_4::printrear() {
 
 void Layer_4::print() {
     for (int i = 0; i < varr.size(); i++) {
-        std::cout << "vertex : " << i << std::endl;
+        printf("vertex : %d\n", i);
         varr[i].print();
     }
-    std::cout << std::endl;
+    printf("\n");
 }
+void Layer_4::init(){
+    for(int i=0; i<varr.size();i++){
+        varr[i].init();
+    }
+}
+
 Layer_output::Layer_output(int size){
     front = nullptr;
     rear = nullptr;
@@ -62,17 +67,17 @@ void Layer_output::printrear() {
 
 void Layer_output::print() {
     for (int i = 0; i < varr.size(); i++) {
-        std::cout << "vertex : " << i << std::endl;
+        printf("vertex : %d\n", i);
         varr[i].print();
     }
-    
-    std::cout << std::endl;
+    printf("\n");
 }
 void Layer_output::foward(){
-    this->print();
-    printf("---THE END!---\n");
     for(int i=0;i<this->varr.size(); i++){
         auto output = varr[i].foward();
         printf("%lf ", output);
     }
+    printf("---THE END!---\n");
+}
+void Layer_output::init(){
 }
