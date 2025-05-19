@@ -40,7 +40,7 @@ public:
 
     Layer_output(int size);
     
-    void foward();
+    vector<float> foward();
     
     void print() override;
 

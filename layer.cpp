@@ -4,7 +4,7 @@ void Layer::foward(){
     for(int i=0;i<this->varr.size(); i++){
         auto output = varr[i].foward();
         for(int j = 0; j < this->rear->varr.size(); j++){//next input
-            this->rear->varr[j].weight[i] = output;
+            rear->varr[j].input[i] = output;
         }
     }
 }
@@ -72,12 +72,15 @@ void Layer_output::print() {
     }
     printf("\n");
 }
-void Layer_output::foward(){
+vector<float> Layer_output::foward(){
+    vector<float> toreturn(varr.size());
     for(int i=0;i<this->varr.size(); i++){
-        auto output = varr[i].foward();
+        double output = varr[i].foward();
         printf("%lf ", output);
+        toreturn[i] = output;
     }
     printf("---THE END!---\n");
+    return toreturn;
 }
 void Layer_output::init(){
 }

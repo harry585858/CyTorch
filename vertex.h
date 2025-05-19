@@ -18,5 +18,5 @@ public:
     void print() override; // 부모 클래스의 virtual 함수 오버라이드
     float foward() override;
     vertex_4();
-    void init();
+    void init() override;
 };

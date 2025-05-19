@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <fstream>
 #include <sstream>
+#include "loss.h"
 #define save_direction "/Users/yangjaemin/Desktop/model.json"
 Model::Model(int num, vector<int> arr){
     int outputsize = arr[num-1];
@@ -67,22 +68,35 @@ void Model::print(){
         larr[i]->print();
     }
 }
-void Model::foward(vector<float> firstlayer){
+vector<float> Model::foward(vector<float> firstlayer){
     if(firstlayer.size() != larr[0]->varr.size()){
         printf("Input Layer Size Error");
-        return;
+        return {};
     }
-    printf("---START!---\n");
+    printf("---FOWARD_START!---\n");
     for(int i=0;i<firstlayer.size();i++){//input layer setting
         larr[0]->varr[i].input[0] = firstlayer[i];
     }
     for(int i=0;i<larr.size(); i++){
         larr[i]->foward();
     }
-    outp->foward();
+    return outp->foward();
 }
 void Model::init(){
     for(int i=1; i<larr.size(); i++){
         larr[i]->init();
     }
+}
+void Model::fit(vector<float> input, vector<float> expected_output) {
+    // 1. 순전파 수행 및 예측값 받기
+    vector<float> prediction = foward(input);
+
+    // 2. 손실 및 출력층 delta 계산
+    float losssum = 0.0f;
+    for (int i = 0; i < prediction.size(); i++) {
+        float diff = prediction[i] - expected_output[i];
+        losssum += loss(prediction[i],expected_output[i]);
+    }
+    // 3. 손실 출력 (디버깅용)
+    printf("Average Loss: %f\n", losssum/outp->varr.size());
 }

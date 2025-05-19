@@ -12,9 +12,9 @@
 #include "model.h"
 using namespace std;
 int main() {
-    Model model(5, {3,5,5,5,3});//layer, size
-    model.print();
-    model.foward({1.0,2.0,3.0});
+    srand(static_cast<unsigned int>(time(NULL)));
+    Model model(3, {3,3,3});//layer, size
+    model.fit({1,1,1}, {1,1,1});
     return 0;
     
 }
