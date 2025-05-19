@@ -9,7 +9,7 @@ public:
     ~Model();
     void save();
     void print();
-    vector<float> foward(vector<float>);
+    vector<float> forward(vector<float>);
     void init();
     void fit(vector<float> input, vector<float> output);
 };

@@ -68,19 +68,19 @@ void Model::print(){
         larr[i]->print();
     }
 }
-vector<float> Model::foward(vector<float> firstlayer){
+vector<float> Model::forward(vector<float> firstlayer){
     if(firstlayer.size() != larr[0]->varr.size()){
         printf("Input Layer Size Error");
         return {};
     }
-    printf("---FOWARD_START!---\n");
+    printf("---forward_START!---\n");
     for(int i=0;i<firstlayer.size();i++){//input layer setting
         larr[0]->varr[i].input[0] = firstlayer[i];
     }
     for(int i=0;i<larr.size(); i++){
-        larr[i]->foward();
+        larr[i]->forward();
     }
-    return outp->foward();
+    return outp->forward();
 }
 void Model::init(){
     for(int i=1; i<larr.size(); i++){
@@ -88,15 +88,26 @@ void Model::init(){
     }
 }
 void Model::fit(vector<float> input, vector<float> expected_output) {
-    // 1. 순전파 수행 및 예측값 받기
-    vector<float> prediction = foward(input);
+    // 순전파
+    vector<float> prediction = forward(input);
 
-    // 2. 손실 및 출력층 delta 계산
+    // 손실 계산
     float losssum = 0.0f;
     for (int i = 0; i < prediction.size(); i++) {
-        float diff = prediction[i] - expected_output[i];
-        losssum += loss(prediction[i],expected_output[i]);
+        losssum += loss(prediction[i], expected_output[i]);
     }
-    // 3. 손실 출력 (디버깅용)
-    printf("Average Loss: %f\n", losssum/outp->varr.size());
+    printf("Average Loss: %f\n", losssum / prediction.size());
+
+    // 역전파
+    outp->backward(expected_output);
+    for (int i = larr.size() - 1; i >= 1; i--) {
+        larr[i]->backward();
+    }
+
+    // 가중치 수정
+    float learning_rate = 0.01f;
+    outp->update_weights(learning_rate);  // Layer_output에도 동일한 방식 필요
+    for (int i = 1; i < larr.size(); i++) {
+        larr[i]->update_weights(learning_rate);
+    }
 }

@@ -15,6 +15,9 @@ int main() {
     srand(static_cast<unsigned int>(time(NULL)));
     Model model(3, {3,3,3});//layer, size
     model.fit({1,1,1}, {1,1,1});
+    model.fit({1,1,1}, {1,1,1});
+    model.fit({1,1,1}, {1,1,1});
+    model.fit({1,1,1}, {1,1,1});
     return 0;
     
 }

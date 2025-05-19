@@ -1,8 +1,8 @@
 #include "layer.h"
 #include <cstdio>
-void Layer::foward(){
+void Layer::forward(){
     for(int i=0;i<this->varr.size(); i++){
-        auto output = varr[i].foward();
+        auto output = varr[i].forward();
         for(int j = 0; j < this->rear->varr.size(); j++){//next input
             rear->varr[j].input[i] = output;
         }
@@ -51,7 +51,14 @@ void Layer_4::init(){
         varr[i].init();
     }
 }
-
+void Layer_4::update_weights(float learning_rate) {
+    for (int i = 0; i < varr.size(); i++) {
+        for (int j = 0; j < varr[i].weight.size(); j++) {
+            varr[i].weight[j] -= learning_rate * varr[i].delta * varr[i].input[j];
+        }
+        varr[i].bias -= learning_rate * varr[i].delta;
+    }
+}
 Layer_output::Layer_output(int size){
     front = nullptr;
     rear = nullptr;
@@ -72,15 +79,23 @@ void Layer_output::print() {
     }
     printf("\n");
 }
-vector<float> Layer_output::foward(){
+vector<float> Layer_output::forward(){
     vector<float> toreturn(varr.size());
     for(int i=0;i<this->varr.size(); i++){
-        double output = varr[i].foward();
+        double output = varr[i].forward();
         printf("%lf ", output);
         toreturn[i] = output;
     }
     printf("---THE END!---\n");
     return toreturn;
+}
+void Layer_output::update_weights(float learning_rate) {
+    for (int i = 0; i < varr.size(); i++) {
+        for (int j = 0; j < varr[i].weight.size(); j++) {
+            varr[i].weight[j] -= learning_rate * varr[i].delta * varr[i].input[j];
+        }
+        varr[i].bias -= learning_rate * varr[i].delta;
+    }
 }
 void Layer_output::init(){
 }

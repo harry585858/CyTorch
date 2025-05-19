@@ -22,11 +22,12 @@ void vertex_4::print() {
     }
     printf("\n");
 }
-float vertex_4::foward(){
-    float sum = 0;
+float vertex_4::forward(){
+    float sum = 0.0f;
     for(int i=0;i<this->input.size(); i++){
         sum += weight[i] * input[i];
     }
     sum+=bias;
+    output = fp(sum);
     return fp(sum);
 }

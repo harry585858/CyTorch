@@ -13,7 +13,7 @@ public:
     virtual void printrear() = 0;
     virtual void init()=0;
     void append(Layer* toappend);
-    void foward();
+    void forward();
 };
 
 // 템플릿 클래스 (구체적인 Layer 타입)
@@ -31,6 +31,17 @@ public:
     void append(Layer_4* toappend);
     void append(Layer* toappend);
     void init() override;
+    void update_weights(float leaning_rate);
+    // Layer_4.cpp
+    void backward() {
+        for (int i = 0; i < varr.size(); i++) {
+            float sum = 0.0f;
+            for (int j = 0; j < rear->varr.size(); j++) {
+                sum += rear->varr[j].weight[i] * rear->varr[j].delta;
+            }
+            varr[i].delta = sum * varr[i].fp_d(varr[i].delta);
+        }
+    }
 };
 
 class Layer_output : public Layer{
@@ -40,12 +51,19 @@ public:
 
     Layer_output(int size);
     
-    vector<float> foward();
-    
+    vector<float> forward();
     void print() override;
 
     void printrear() override;
 
     void append(Layer_4* toappend);
     void init() override;
+    void backward(vector<float> expected) {
+        for (int i = 0; i < varr.size(); i++) {
+            float pred = varr[i].output;
+            float error = loss_d(pred, expected[i]);  // dL/dy
+            varr[i].delta = error * varr[i].fp_d(varr[i].output);   // dL/dz
+        }
+    }
+    void update_weights(float learning_rate);
 };
